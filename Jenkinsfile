@@ -10,46 +10,75 @@ pipeline{
             steps{
                echo 'fetch the source code from the directory path specified by the environment variable'
                 echo 'compile the code and generate any necessary artifacts'
+                echo "Building the code using Jenkins..."
+                
+            }
+            post{
+                success{
+                    echo 'The build was successful!'
+                    mail to: 'mebram51@gmail.com', subject: 'Build Successful', body: 'The build was successful!'
+                }
+                failure{
+                    echo 'The build failed!'
+                    mail to: 'mebram51@gmail.com', subject: 'Build Failed', body: 'The build failed!'
+                }
             }
         }
         stage('Unit and Integration Tests '){
             steps{
-                echo 'unit tests...'
-                echo 'integration tests....'
+                echo "Running unit tests using Jenkins..."
+                echo "Running integration tests using Jenkins..."
             }
         }
 
         stage('Code Analysis '){
             steps{
-               echo 'check the quality of the code.....'
+               echo "Analyzing the code using Jenkins static code analysis tools..."
             }
         }
         stage('Security Scan '){
             steps{
-                echo 'Testing the project'
-            }
+                echo "Performing security scan using Jenkins security scan plugins(e.g., probely plugin)..."
+        }
         }
         stage('Deploy to Staging'){
             steps{
-                echo 'Deploying the project'
+                echo "Deploying the application to a staging server (e.g., AWS EC2 instance)..."
             }
+            post{
+                success{
+                    echo 'The deployment to staging was successful!'
+                    mail to: 'mebram51@gmail.com',       subject: 'Deployment to Staging Successful', body: 'The deployment to staging was successful!'
+                }
+                failure{
+                    echo 'The deployment to staging failed!'
+                    mail to: 'mebram51@gmail.com', subject: 'Deployment to Staging Failed', body: 'The deployment to staging failed!'
+            }
+        }
         }
         stage('Integration Tests on Staging'){
             steps{
-                echo 'Deploying the project'
+                echo "Running integration tests on the staging environment..."
             }
         }
         stage('Deploy to Production'){
             steps{
-                echo "Deploying the code to the production environment (${env.PRODUCTION_ENVIRONMENT})..."
+                echo "Deploying the application to a production server (e.g., AWS EC2 instance)..."
                 }
+                post{
+                    success{
+                        echo 'The deployment to production was successful!'
+                        mail to: 'mebram51@gmail.com', subject: 'Deployment to Production Successful', body: 'The deployment to production was successful!'
+                       
+                    }
+                    failure{
+                        echo 'The deployment to production failed!'
+                        mail to:    'mebram51@gmail.com', subject: 'Deployment to Production Failed', body: 'The deployment to production failed!'
+                
+                     }   
+      
+         }
         }
-        stage('Complete'){
-            steps{
-                echo "Deploying the code to the production environment is completed..."
-                }
-        }
-    }
     post{
         always{
             echo 'This will always run'
@@ -72,4 +101,5 @@ pipeline{
             mail to: 'mebram51@gmail.com', subject: '$JOB_NAME - Build # $BUILD_NUMBER - Status Changed', body: 'The build status has changed.'
         }
     }
+}
 }
