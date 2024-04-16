@@ -44,6 +44,11 @@ pipeline{
                 echo "Deploying the code to the production environment (${env.PRODUCTION_ENVIRONMENT})..."
                 }
         }
+        stage('Complete'){
+            steps{
+                echo "Deploying the code to the production environment is completed..."
+                }
+        }
     }
     post{
         always{
