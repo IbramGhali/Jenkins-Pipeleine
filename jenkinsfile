@@ -1,0 +1,58 @@
+pipeline{
+    agent any
+    stages{
+        stage('Build'){
+            steps{
+                echo 'Building the project'
+            }
+        }
+        stage('Unit and Integration Tests '){
+            steps{
+                echo 'Testing the project'
+            }
+        }
+
+        stage('Code Analysis '){
+            steps{
+                echo 'Testing the project'
+            }
+        }
+        stage('Security Scan '){
+            steps{
+                echo 'Testing the project'
+            }
+        }
+        stage('Deploy to Staging'){
+            steps{
+                echo 'Deploying the project'
+            }
+        }
+        stage('Integration Tests on Staging'){
+            steps{
+                echo 'Deploying the project'
+            }
+        }
+        stage('Deploy to Production'){
+            steps{
+                echo 'Deploying the project'
+            }
+        }
+    }
+    post{
+        always{
+            echo 'This will always run'
+        }
+        success{
+            echo 'This will run only if the build is successful'
+        }
+        failure{
+            echo 'This will run only if the build fails'
+        }
+        unstable{
+            echo 'This will run only if the build is unstable'
+        }
+        changed{
+            echo 'This will run only if the build status changes'
+        }
+    }
+}
