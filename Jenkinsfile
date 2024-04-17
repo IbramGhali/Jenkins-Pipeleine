@@ -18,6 +18,10 @@ pipeline {
                 success {
                     echo 'The build was successful!'
                     mail to: 'mebram51@gmail.com', subject: 'Build Successful', body: 'The build was successful!'
+                    emailext attachmentsPattern: 'generatedFile.txt',
+                     body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
+                        recipientProviders: [developers(), requestor()],
+                            subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
                 }
                 failure {
                     echo 'The build failed!'
