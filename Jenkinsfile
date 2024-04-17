@@ -33,12 +33,12 @@ pipeline {
             post {
                 success {
                     echo 'Tests passed successfully!'
-                     mail to: 'mebram51@gmail.com', subject: 'Tests Passed', body: 'Unit and Integration Tests passed successfully!',attachLog: true, mimeType: 'text/html'
+                     emailext(body: 'Unit and Integration Tests passed successfully!', subject: 'Tests Passed', to:'mebram51@gmail.com', attachLog: true, mimeType: 'text/html')
                    }
                 
                 failure {
                     echo 'Tests failed!'
-                     mail to: 'mebram51@gmail.com', subject: 'Tests Failed', body: 'Unit and Integration Tests failed!',attachLog: true, mimeType: 'text/html'
+                    emailext(body: 'Unit and Integration Tests failed!', subject: 'Tests Failed', to:'mebram51@gmail.com', attachLog: true, mimeType: 'text/html')
                 }
             }
         }
@@ -56,11 +56,11 @@ pipeline {
             post {
                 success {
                     echo 'Security scan passed successfully!'
-                    mail to: 'mebram51@gmail.com', subject: 'Security Scan Passed', body: 'Security Scan passed successfully!',attachLog: true, mimeType: 'text/html'
+                    emailext(body: 'Security scan passed successfully!', subject: 'Security Scan Passed',  to:'mebram51@gmail.com', attachLog: true, mimeType: 'text/html')
                 }
                 failure {
                     echo 'Security scan failed!'
-                    mail to: 'mebram51@gmail.com', subject: 'Security Scan Failed', body: 'Security Scan failed!',attachLog: true, mimeType: 'text/html'
+                    emailext(body: 'Security scan failed!', subject: 'Security Scan Failed',  to:'mebram51@gmail.com', attachLog: true, mimeType: 'text/html')
                 }
             }
         }
