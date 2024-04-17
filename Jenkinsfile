@@ -85,7 +85,7 @@ pipeline {
         }
         success {
             echo 'This will run only if the build is successful'
-            mail to: 'mebram51@gmail.com', subject: '${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Successful', body: 'Congratulations! Your build was successful.'
+            mail to: 'mebram51@gmail.com', subject: '${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Successful', body: 'Congratulations! Your project has passed all stages successfully .'
         }
         failure {
             echo 'This will run only if the build fails'
