@@ -30,11 +30,35 @@ pipeline {
                 echo "Running unit tests using Jenkins..."
                 echo "Running integration tests using Jenkins..."
             }
+            post {
+                success {
+                    echo 'Tests passed successfully!'
+                    mailBody = 'Unit and Integration Tests passed successfully!'
+                    emailext attachLog: true, body: mailBody, mimeType: 'text/html', subject: 'Tests Passed', to: 'mebram51@gmail.com'
+                }
+                failure {
+                    echo 'Tests failed!'
+                    mailBody = 'Unit and Integration Tests failed!'
+                    emailext attachLog: true, body: mailBody, mimeType: 'text/html', subject: 'Tests Failed', to: 'mebram51@gmail.com'
+                }
+            }
         }
 
         stage('Code Analysis') {
             steps {
                 echo "Analyzing the code using Jenkins static code analysis tools..."
+            }
+            post {
+                success {
+                    echo 'Security scan passed successfully!'
+                    mailBody = 'Security Scan passed successfully!'
+                    emailext attachLog: true, body: mailBody, mimeType: 'text/html', subject: 'Security Scan Passed', to: 'mebram51@gmail.com'
+                }
+                failure {
+                    echo 'Security scan failed!'
+                    mailBody = 'Security Scan failed!'
+                    emailext attachLog: true, body: mailBody, mimeType: 'text/html', subject: 'Security Scan Failed', to: 'mebram51@gmail.com'
+                }
             }
         }
         stage('Security Scan') {
