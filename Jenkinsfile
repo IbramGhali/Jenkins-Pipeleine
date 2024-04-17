@@ -34,6 +34,7 @@ pipeline {
                 success {
                     echo 'Tests passed successfully!'
                      emailext body: 'Unit and Integration Tests passed successfully!', subject: 'Tests Passed', to:'mebram51@gmail.com', attachLog: true, mimeType: 'text/plain' 
+                     emailext(attachmentsPattern: '**/target/surefire-reports/*.txt',attachLog: true, body: 'Unit and Integration Tests passed successfully!', mimeType: 'text/html', subject: 'Unit and Integration Tests Passed', to:'mebram51@gmail.com' )
                      
                    }
                 
