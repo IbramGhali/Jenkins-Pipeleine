@@ -54,11 +54,17 @@ pipeline {
         stage('Security Scan') {
             steps {
                 echo "Performing security scan using Jenkins security scan plugins(e.g., probely plugin)..."
+                script {
+                    // Your security scan steps go here
+
+                    // Send email with attachment using mail command
+                    sh "echo 'Security scan failed!' | mail -s 'Security Scan Failed' -a ${env.JENKINS_HOME}/jenkins.out mebram51@gmail.com"
+                }
             }
             post {
                 success {
                     echo 'Security scan passed successfully!'
-                    emailext body: 'Security scan passed successfully!', subject: 'Security Scan Passed',  to:'mebram51@gmail.com', attachLog: true, mimeType: 'text/html'
+                    emailext body: 'Security scan passed successfully!', subject: 'Security Scan Passed',  to:'mebram51@gmail.com', attachLog: true, mimeType: 'text/html'  
                 }
                 failure {
                     echo 'Security scan failed!'
