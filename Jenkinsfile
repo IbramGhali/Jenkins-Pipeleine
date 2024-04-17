@@ -33,13 +33,12 @@ pipeline {
             post {
                 success {
                     echo 'Tests passed successfully!'
-                    mailBody = 'Unit and Integration Tests passed successfully!'
-                    emailext attachLog: true, body: mailBody, mimeType: 'text/html', subject: 'Tests Passed', to: 'mebram51@gmail.com'
-                }
+                     mail to: 'mebram51@gmail.com', subject: 'Tests Passed', body: 'Unit and Integration Tests passed successfully!',attachLog: true, mimeType: 'text/html'
+                   }
+                
                 failure {
                     echo 'Tests failed!'
-                    mailBody = 'Unit and Integration Tests failed!'
-                    emailext attachLog: true, body: mailBody, mimeType: 'text/html', subject: 'Tests Failed', to: 'mebram51@gmail.com'
+                     mail to: 'mebram51@gmail.com', subject: 'Tests Failed', body: 'Unit and Integration Tests failed!',attachLog: true, mimeType: 'text/html'
                 }
             }
         }
@@ -48,22 +47,21 @@ pipeline {
             steps {
                 echo "Analyzing the code using Jenkins static code analysis tools..."
             }
-            post {
-                success {
-                    echo 'Security scan passed successfully!'
-                    mailBody = 'Security Scan passed successfully!'
-                    emailext attachLog: true, body: mailBody, mimeType: 'text/html', subject: 'Security Scan Passed', to: 'mebram51@gmail.com'
-                }
-                failure {
-                    echo 'Security scan failed!'
-                    mailBody = 'Security Scan failed!'
-                    emailext attachLog: true, body: mailBody, mimeType: 'text/html', subject: 'Security Scan Failed', to: 'mebram51@gmail.com'
-                }
-            }
+            
         }
         stage('Security Scan') {
             steps {
                 echo "Performing security scan using Jenkins security scan plugins(e.g., probely plugin)..."
+            }
+            post {
+                success {
+                    echo 'Security scan passed successfully!'
+                    mail to: 'mebram51@gmail.com', subject: 'Security Scan Passed', body: 'Security Scan passed successfully!',attachLog: true, mimeType: 'text/html'
+                }
+                failure {
+                    echo 'Security scan failed!'
+                    mail to: 'mebram51@gmail.com', subject: 'Security Scan Failed', body: 'Security Scan failed!',attachLog: true, mimeType: 'text/html'
+                }
             }
         }
         stage('Deploy to Staging') {
