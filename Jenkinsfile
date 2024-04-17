@@ -17,7 +17,7 @@ pipeline {
             post {
                 success {
                     echo 'The build was successful!'
-                    mail to: 'mebram51@gmail.com', subject: 'Build Successful', body: 'The build was successful!'
+                    mail to: 'mebram51@gmail.com', subject: 'Build Successful', body: 'The build was successful!', attachLog: true, mimeType: 'text/html'
                 }
                 failure {
                     echo 'The build failed!'
@@ -33,12 +33,12 @@ pipeline {
             post {
                 success {
                     echo 'Tests passed successfully!'
-                     emailext(body: 'Unit and Integration Tests passed successfully!', subject: 'Tests Passed', to:'mebram51@gmail.com', attachLog: true, mimeType: 'text/html')
+                     emailext body: 'Unit and Integration Tests passed successfully!', subject: 'Tests Passed', to:'mebram51@gmail.com', attachLog: true, mimeType: 'text/html'
                    }
                 
                 failure {
                     echo 'Tests failed!'
-                    emailext(body: 'Unit and Integration Tests failed!', subject: 'Tests Failed', to:'mebram51@gmail.com', attachLog: true, mimeType: 'text/html')
+                    emailext body: 'Unit and Integration Tests failed!', subject: 'Tests Failed', to:'mebram51@gmail.com', attachLog: true, mimeType: 'text/html'
                 }
             }
         }
@@ -56,11 +56,11 @@ pipeline {
             post {
                 success {
                     echo 'Security scan passed successfully!'
-                    emailext(body: 'Security scan passed successfully!', subject: 'Security Scan Passed',  to:'mebram51@gmail.com', attachLog: true, mimeType: 'text/html')
+                    emailext body: 'Security scan passed successfully!', subject: 'Security Scan Passed',  to:'mebram51@gmail.com', attachLog: true, mimeType: 'text/html'
                 }
                 failure {
                     echo 'Security scan failed!'
-                    emailext(body: 'Security scan failed!', subject: 'Security Scan Failed',  to:'mebram51@gmail.com', attachLog: true, mimeType: 'text/html')
+                    emailext body: 'Security scan failed!', subject: 'Security Scan Failed',  to:'mebram51@gmail.com', attachLog: true, mimeType: 'text/html'
                 }
             }
         }
