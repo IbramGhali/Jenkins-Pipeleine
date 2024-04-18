@@ -58,6 +58,8 @@ pipeline {
             post {
                 success {
                     echo 'Security scan passed successfully!'
+                    emailext attachLog: true, body: "${currentBuild.result}: ${BUILD_URL}", compressLog: true, replyTo: 'mebram51@gmail.com',
+                     subject: "Build Notification: ${JOB_NAME}-Build# ${BUILD_NUMBER} ${currentBuild.result}", to: 'mebram51@gmail.com'
                     emailext body: 'Security scan passed successfully!', subject: 'Security Scan Passed',  to:'mebram51@gmail.com', attachLog: true, mimeType: 'text/html'  
                 }
                 failure {
