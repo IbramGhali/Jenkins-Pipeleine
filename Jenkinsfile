@@ -17,7 +17,7 @@ pipeline {
             post {
                 success {
                     echo 'The build was successful!'
-                    mail to: 'mebram51@gmail.com', subject: 'Build Successful', body: 'The build was successful!'
+                    mail to: 'azadeh.gharineiat@deakin.edu.au', subject: 'Build Successful', body: 'The build was successful!'
                 }
                 failure {
                     echo 'The build failed!'
@@ -33,8 +33,8 @@ pipeline {
             post {
                 success {
                     echo 'Tests passed successfully!'
-                     emailext body: 'Unit and Integration Tests passed successfully!', subject: 'Tests Passed', to:'mebram51@gmail.com', attachLog: true, mimeType: 'text/plain' 
-                     emailext(attachmentsPattern: '**/target/surefire-reports/*.txt',attachLog: true, body: 'Unit and Integration Tests passed successfully!', mimeType: 'text/html', subject: 'Unit and Integration Tests Passed', to:'mebram51@gmail.com' )
+                     emailext body: 'Unit and Integration Tests passed successfully!', subject: 'Tests Passed', to:'azadeh.gharineiat@deakin.edu.au', attachLog: true, mimeType: 'text/plain' 
+                     emailext(attachmentsPattern: '**/target/surefire-reports/*.txt',attachLog: true, body: 'Unit and Integration Tests passed successfully!', mimeType: 'text/html', subject: 'Unit and Integration Tests Passed', to:'azadeh.gharineiat@deakin.edu.au' )
                      
                    }
                 
