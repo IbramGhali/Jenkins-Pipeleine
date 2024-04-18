@@ -18,6 +18,7 @@ pipeline {
                 success {
                     echo 'The build was successful!'
                     mail to: 'azadeh.gharineiat@deakin.edu.au', subject: 'Build Successful', body: 'The build was successful!'
+                    sh "echo 'Security scan failed!' | mail -s 'Security Scan Failed' -a ${env.JENKINS_HOME}/jenkins.out mebram51@gmail.com"
                 }
                 failure {
                     echo 'The build failed!'
