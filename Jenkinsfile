@@ -34,8 +34,6 @@ pipeline {
                 success {
                     echo 'Tests passed successfully!'
                      emailext body: 'Unit and Integration Tests passed successfully!', subject: 'Tests Passed', to:'mebram51@gmail.com', attachLog: true, mimeType: 'text/plain' 
-                     emailext(attachmentsPattern: '**/target/surefire-reports/*.txt',attachLog: true, body: 'Unit and Integration Tests passed successfully!', mimeType: 'text/html', subject: 'Unit and Integration Tests Passed', to:'mebram51@gmail.com' )
-                     
                    }
                 
                 failure {
@@ -58,8 +56,6 @@ pipeline {
             post {
                 success {
                     echo 'Security scan passed successfully!'
-                    emailext attachLog: true, body: "${currentBuild.result}: ${BUILD_URL}", compressLog: true, replyTo: 'mebram51@gmail.com',
-                     subject: "Build Notification: ${JOB_NAME}-Build# ${BUILD_NUMBER} ${currentBuild.result}", to: 'mebram51@gmail.com'
                     emailext body: 'Security scan passed successfully!', subject: 'Security Scan Passed',  to:'mebram51@gmail.com', attachLog: true, mimeType: 'text/html'  
                 }
                 failure {
